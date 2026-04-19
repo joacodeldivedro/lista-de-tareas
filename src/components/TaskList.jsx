@@ -6,7 +6,7 @@ const TaskList = ({ tareas, completarTarea, eliminarTarea }) => {
     <ul style={{ listStyle: 'none', padding: 0 }}>
       {tareas.map((tarea) => (
         <TaskItem 
-          key={tarea.id} // Requisito: key única
+          key={tarea.id} 
           tarea={tarea} 
           completarTarea={completarTarea}
           eliminarTarea={eliminarTarea}

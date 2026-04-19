@@ -5,9 +5,9 @@ const TaskInput = ({ agregarTarea }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (texto.trim() === '') return; // No agrega si está vacío
-    agregarTarea(texto); // Envía al padre
-    setTexto(''); // Limpia el input (UX Bonus)
+    if (texto.trim() === '') return; 
+    agregarTarea(texto); 
+    setTexto(''); 
   };
 
   return (
