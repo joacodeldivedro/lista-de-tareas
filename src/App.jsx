@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import TaskInput from './components/TaskInput'
 import TaskList from './components/TaskList'
+import Contador from './components/Contador' 
+import ContadorPersistente from './components/ContadorPersistente' // Línea 5 (OK)
 import './App.css'
 
 function App() {
-  // 1. Estado principal: Array de objetos (tareas)
   const [tareas, setTareas] = useState([])
 
-  // 2. Función para agregar una nueva tarea
   const agregarTarea = (texto) => {
+    if (!texto.trim()) return; 
     const nuevaTarea = {
-      id: Date.now(), // Identificador único
+      id: Date.now(),
       texto: texto,
       completada: false
     }
     setTareas([...tareas, nuevaTarea])
   }
 
-  // 3. Función para gestionar el cambio de estado (completar/deshacer)
   const completarTarea = (id) => {
     setTareas(
       tareas.map((t) =>
@@ -26,29 +26,32 @@ function App() {
     )
   }
 
-  // 4. Función para eliminar tarea (Bonus)
   const eliminarTarea = (id) => {
     setTareas(tareas.filter((t) => t.id !== id))
   }
 
-  // 5. Estadísticas (Bonus)
   const total = tareas.length
   const completadas = tareas.filter(t => t.completada).length
 
   return (
     <div className="container">
+      {/* SECCIÓN DE CONTADORES */}
+      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+        <Contador />
+        <ContadorPersistente />
+      </div>
+
+      <hr />
+
       <h1>Lista de Tareas</h1>
       
-      {/* Componente para ingresar tareas */}
       <TaskInput agregarTarea={agregarTarea} />
 
-      {/* Estadísticas del Bonus */}
       <div className="stats">
         <p>Total de tareas: {total}</p>
         <p>Completadas: {completadas}</p>
       </div>
 
-      {/* Componente que renderiza la lista */}
       <TaskList 
         tareas={tareas} 
         completarTarea={completarTarea} 
